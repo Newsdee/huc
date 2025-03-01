@@ -156,33 +156,33 @@ main()
 	/*  demo main loop */
 	for (;;)
 	{
-		flag = 0;
+		flag = FALSE;
 		
 		/*  check if we should pause */
 		if(joytrg(0) & JOY_STRT) {
 			pause();
 		}
 
-		/*  get move direction */
-		/*
-		if (joy(0) & JOY_LEFT) {
-			//dir  = -1;
-			dir = 1; // disable left side for now
-			flag =  TRUE;
-		}
-		else
+
 		if (joy(0) & JOY_RGHT) {
 			dir  =  1;
 			flag =  TRUE;
 		}
-		else {
-			flag = FALSE;
+		
+		
+		
+		
+		/*
+		if (joy(0) & JOY_LEFT) {
+			dir  = -1;
+			flag =  TRUE;
 		}
 		*/
 
+
 		/*  calculate the new scroll position */
 		//if (flag == TRUE)
-		//	tx = sx + (dir*2); // << 1);
+		//	tx = sx + (dir << 1);
 		//else
 			tx = sx + (dir);
 		
