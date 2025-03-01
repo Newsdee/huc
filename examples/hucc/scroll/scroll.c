@@ -162,28 +162,21 @@ main()
 		if(joytrg(0) & JOY_STRT) {
 			pause();
 		}
-
-
+		
 		if (joy(0) & JOY_RGHT) {
 			dir  =  1;
 			flag =  TRUE;
 		}
-		
-		
-		
-		
-		/*
+			
 		if (joy(0) & JOY_LEFT) {
 			dir  = -1;
 			flag =  TRUE;
 		}
-		*/
-
-
+		
 		/*  calculate the new scroll position */
-		//if (flag == TRUE)
-		//	tx = sx + (dir << 1);
-		//else
+		if (flag == TRUE)
+			tx = sx + (dir << 1);
+		else
 			tx = sx + (dir);
 		
 		/*  compare the old and new screen position
@@ -201,46 +194,28 @@ main()
 				batx = (tx>>4) + SCREEN_WIDTH; /*  screen x coordinate (in tile unit) */
 				baty = 0;			           /*  screen y */  
 			
-				/*if (batx<0)
+				if (batx<0)
 					batx += SCREEN_WIDTH;
-				else 
-					batx = batx % SCREEN_WIDTH;
-				*/
 			
-				load_map(
-				   batx,
-				   0, 
-				   map_x + SCREEN_WIDTH,  /*  map x */
-				   0,                     /*  map y */
-				   1,                     /*  nb of map columns to load */
-				   SCREEN_HEIGHT);        /*  nb of rows */
+				load_map(batx,0, map_x + SCREEN_WIDTH,0,1,SCREEN_HEIGHT);      
+			
+
 			}
 
 			/*  left dir */
 			else {
 				map_x = map_x - 1;
 
-				/*
 				if (map_x  < 0)
 					map_x += MAP_WIDTH;
-				*/
 				
 				batx = (tx >> 4); /*  screen x coordinate (in tile unit) */
 				baty = 0;		  /*  screen y */  
 
 				if (batx<0)
 					batx += SCREEN_WIDTH;
-				else 
-					batx = batx % SCREEN_WIDTH;
 				
-
-				load_map(
-				   batx,    
-				   baty,   
-				   map_x,	       /*  map x */
-				   0,              /*  map y */
-				   1,   		   /*  nb of map columns to load */
-				   SCREEN_HEIGHT); /*  nb of rows */
+				load_map(batx,baty, map_x,0,1, SCREEN_HEIGHT);
 			}
 			score += 1;
 		}
@@ -255,16 +230,7 @@ main()
 
 		/*  display score */
 		put_number(score, 5, 8, 25);
-		/* 
-		debug
-		put_number(batx, 5, 8, 26);
-		put_number(map_x, 5, 8, 27);
 		
-		put_number(dir, 5, 16, 25);
-		put_number(tx, 5, 16, 26);
-		put_number(sx, 5, 16, 27);
-		*/
-
 		/*  set new scroll position */
 		sx = tx;
 		scroll_split(0, 0, sx, sy, BKG_ON | SPR_ON);
